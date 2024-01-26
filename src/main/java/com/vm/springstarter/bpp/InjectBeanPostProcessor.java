@@ -24,6 +24,7 @@ public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationCo
                    ReflectionUtils.setField(field,bean,objectToInject);
                });
 
+
         return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
     }
 
