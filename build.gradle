@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0-M1'
     implementation 'org.springframework:spring-core:6.1.1'
     implementation 'org.springframework:spring-context:6.1.1'
     compileOnly 'org.projectlombok:lombok:1.18.30'
