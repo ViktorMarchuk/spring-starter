@@ -1,2 +1,5 @@
-rootProject.name = 'spring-starter'
+//rootProject.name = 'spring-starter'
 
+plugins {
+    id "com.gradle.enterprise" version "3.16.1"
+}
