@@ -1,16 +1,14 @@
 package com.vm.springstarter.bpp;
 
-
-import lombok.Data;
-import lombok.Setter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import java.util.Arrays;
-
+@Component
 public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -23,8 +21,6 @@ public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationCo
                    ReflectionUtils.makeAccessible(field);
                    ReflectionUtils.setField(field,bean,objectToInject);
                });
-
-
         return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
     }
 
