@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Primary;
 public class AppConfig {
 
     @Bean(value = "connectionPool")
-    @Primary
     public ConnectionPool connectionPool(@Value("${db.username}")String userName) {
         return new ConnectionPool(userName, "34", 89, "onliner");
     }
