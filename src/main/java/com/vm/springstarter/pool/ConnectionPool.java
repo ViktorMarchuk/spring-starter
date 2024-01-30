@@ -1,12 +1,15 @@
 package com.vm.springstarter.pool;
 
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @ToString
 @Component
+@Slf4j
 
 public class ConnectionPool {
 
@@ -23,6 +26,11 @@ public class ConnectionPool {
         this.password = password;
         this.poolSize = poolSize;
         this.url = url;
+    }
+    @PostConstruct
+    private void init(){
+        log.info("Init connection POOL");
+
     }
 }
 

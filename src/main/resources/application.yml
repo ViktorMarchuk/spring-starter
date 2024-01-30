@@ -19,3 +19,11 @@ db:
         timeout: 20
       - size: 10
         timeout: 20
+logging:
+  level:
+     root: WARN
+     com.vm.springstarter.pool: INFO
+  file:
+    name: com.vm
+    path: /
+
