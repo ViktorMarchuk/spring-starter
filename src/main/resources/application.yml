@@ -1,0 +1,21 @@
+db:
+   username: postgres
+   password: root
+   url: www.tut.by
+
+   properties:
+      first: 1
+      last: 2
+      key: value
+
+   pool:
+      size: 10
+      timeout: 20
+
+   pools:
+      - size: 10
+        timeout: 20
+      - size: 10
+        timeout: 20
+      - size: 10
+        timeout: 20
