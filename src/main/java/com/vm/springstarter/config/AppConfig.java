@@ -13,7 +13,7 @@ public class AppConfig {
 
     @Bean(value = "connectionPool")
     public ConnectionPool connectionPool(@Value("${db.username}")String userName) {
-        System.out.println();
+        System.out.println("");
         return new ConnectionPool(userName, "34", 89, "onliner");
     }
 
