@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 
@@ -19,7 +20,7 @@ public class UserRepo {
 
     //    @InjectBean
     @Autowired
-    private ConnectionPool connectionPool1;
+    private ConnectionPool connectionPool;
 
     @Value("${db.pool.size}")
     private Integer poolSize;
@@ -28,6 +29,6 @@ public class UserRepo {
 //    private List<ConnectionPool> connectionPools;
 
     public UserRepo(ConnectionPool connectionPool) {
-        this.connectionPool1 = connectionPool;
+        this.connectionPool = connectionPool;
     }
 }
