@@ -29,5 +29,8 @@ public class CompanyServiceIT {
         actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
 
     }
+    @Test
+    void test(){}
+
 
 }
