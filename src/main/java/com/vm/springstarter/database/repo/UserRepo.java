@@ -1,34 +1,27 @@
 package com.vm.springstarter.database.repo;
 
-import com.vm.springstarter.bpp.InjectBean;
-import com.vm.springstarter.pool.ConnectionPool;
-import jakarta.annotation.Resource;
-import java.util.List;
-import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import com.vm.springstarter.database.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Repository
-public class UserRepo {
+public interface UserRepo extends JpaRepository<User, Long> {
+//    @Query("select u from User u where u.firstName like %:firstname% and u.lastName like %:lastname%")
+//    List<User> findAllByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(@Param("firstname") String firstname,
+//                                                                                     @Param("lastname") String lastname);
+@Query("select u from User u where lower(u.firstName) like lower(concat('%', :firstname, '%')) and lower(u.lastName) like lower(concat('%', :lastname, '%'))")
+List<User> findAllByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(@Param("firstname") String firstname,
+                                                                                 @Param("lastname") String lastname);
 
-    //    @InjectBean
-    @Autowired
-    private ConnectionPool connectionPool;
 
-    @Value("${db.pool.size}")
-    private Integer poolSize;
+    List<User> findByLastName(String lastname);
 
-    //    @Autowired
-//    private List<ConnectionPool> connectionPools;
+    List<User> findAllByFirstNameContainingIgnoreCase(String firstname);
 
-    public UserRepo(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
-    }
+    List<User> findUsersByUserNameContainingIgnoreCase(String userName);
 }

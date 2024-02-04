@@ -1,10 +1,7 @@
 package com.vm.springstarter.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
+@Table(name = "users",schema = "springdata")
+//@ToString(exclude = {"company"})
+//@EqualsAndHashCode(exclude = {"company"})
 
 public class User implements BaseEntity<Long> {
     @Id
@@ -46,4 +45,16 @@ public class User implements BaseEntity<Long> {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<UserChat> userChats = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "User{" +
+               "id=" + id +
+               ", userName='" + userName + '\'' +
+               ", birthDay=" + birthDay +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", role=" + role +
+               // Другие поля...
+               '}';
+    }
 }
