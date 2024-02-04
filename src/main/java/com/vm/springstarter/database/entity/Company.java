@@ -15,7 +15,10 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "company")
+@Table(name = "company",schema = "springdata")
+@NamedQuery(name = "Company.findByName",
+query = "select c from Company c where lower(c.name ) =lower(:name) "
+)
 
 public class Company implements BaseEntity<Integer> {
     @Id
@@ -31,4 +34,5 @@ public class Company implements BaseEntity<Integer> {
     @MapKeyColumn(name = "lang")
     @Column(name = "description")
     private Map<String, String> locales = new HashMap<>();
+
 }

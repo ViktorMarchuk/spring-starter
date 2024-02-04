@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "users_chat")
+@Table(name = "users_chat",schema = "springdata")
 @Entity
 
 public class UserChat implements BaseEntity<Long> {
