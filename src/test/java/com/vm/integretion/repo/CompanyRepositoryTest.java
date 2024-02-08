@@ -44,7 +44,6 @@ public class CompanyRepositoryTest {
 
     @Test
     @Commit
-    @Transactional
     void save() {
         var company = Company.builder()
                 .name("Op")

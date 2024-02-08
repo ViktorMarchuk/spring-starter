@@ -28,6 +28,10 @@ logging:
     path: /
 
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   datasource:
     url: jdbc:postgresql://flora.db.elephantsql.com:5432/bpjvmqeo
     username: bpjvmqeo
