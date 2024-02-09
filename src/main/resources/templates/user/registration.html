@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<form th:action="@{/users}" method="post" th:object="${user}">
+    <label for="username">User name:
+        <input id="username" type="text" name="username" th:value="*{username}">
+    </label><br>
+    <br>
+    <label for="birthDate">Birthday:
+        <input id="birthDate" type="date" name="birthDate" th:value="*{birthDate}">
+    </label><br>
+    <br>
+    <label for="firstname">First name:
+        <input id="firstname" type="text" name="firstname" th:value="*{firstname}">
+    </label><br>
+    <br>
+    <label for="lastname">Last name:
+        <input id="lastname" type="text" name="lastname" th:value="*{lastname}">
+    </label><br>
+    <br>
+    <div th:each="role : ${roles}">
+        <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role ==user.role}"><input>
+        <label th:for="${role}" th:text="${role}">Role name</label>
+    </div>
+    <br>
+    <div>
+        <label for="company">Company:
+            <select id="company" name="companyId">
+                <option th:each="company : ${companies}"
+                        th:value="${company.id}"
+                        th:selected="${company.id} == user.company.id"
+                        th:text="${company.name()}">Company
+                </option>
+            </select>
+        </label>
+    </div>
+</form>
+<br>
+<form action="/users/registration">
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>

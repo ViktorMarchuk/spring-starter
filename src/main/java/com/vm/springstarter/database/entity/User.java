@@ -54,7 +54,6 @@ public class User implements BaseEntity<Long> {
                ", firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +
                ", role=" + role +
-               // Другие поля...
                '}';
     }
 }
