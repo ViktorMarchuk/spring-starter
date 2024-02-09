@@ -2,6 +2,7 @@ package com.vm.springstarter.service;
 
 import com.vm.springstarter.database.repo.UserRepo;
 import com.vm.springstarter.dto.UserCreateEditDto;
+import com.vm.springstarter.dto.UserFilter;
 import com.vm.springstarter.dto.UserReadDto;
 import com.vm.springstarter.mapper.UserCreateEditMapper;
 import com.vm.springstarter.mapper.UserMapper;
@@ -14,11 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+;
 
 @RequiredArgsConstructor
-//@ToString
-//@NoArgsConstructor(force = true)
 @Service
 @Transactional(readOnly = true)
 public class UserService {
@@ -26,6 +25,13 @@ public class UserService {
     private final UserReadMapper userReadMapper;
     private final UserCreateEditMapper userCreateEditMapper;
 
+    public List<UserReadDto> findAll(UserFilter userFilter) {
+        return userRepo
+                .findAllByFilter(userFilter)
+                .stream()
+                .map(userReadMapper::map)
+                .toList();
+    }
     public List<UserReadDto> findAll() {
         return userRepo
                 .findAll()

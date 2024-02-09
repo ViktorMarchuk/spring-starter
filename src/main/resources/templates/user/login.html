@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body>
-<form action="/login" method="post">
+<form action="GET/login" method="post">
     <label for="username">Username:
         <input id="username" type="text" name="username">
     </label><br>
@@ -15,6 +15,11 @@
     </label><br>
     <br>
     <button type="submit">Login</button>
+    <br>
+</form>
+<br>
+<form action="/users/registration">
+    <button type="submit">Registration</button>
 </form>
 </body>
 </html>

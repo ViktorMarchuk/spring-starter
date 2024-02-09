@@ -2,6 +2,7 @@ package com.vm.springstarter.http.controller;
 
 import com.vm.springstarter.database.entity.Role;
 import com.vm.springstarter.dto.UserCreateEditDto;
+import com.vm.springstarter.dto.UserFilter;
 import com.vm.springstarter.dto.UserReadDto;
 import com.vm.springstarter.service.CompanyService;
 import com.vm.springstarter.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -20,8 +22,9 @@ public class UserController {
     private final CompanyService companyService;
 
     @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("users", userService.findAll());
+    public String findAll(Model model, UserFilter userFilter) {
+//        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findAll(userFilter));
         return "user/users";
     }
 
@@ -31,14 +34,18 @@ public class UserController {
                 .map(user -> {
                     model.addAttribute("user", user);
                     model.addAttribute("roles", Role.values());
-                    model.addAttribute("companies",companyService.findAll());
+                    model.addAttribute("companies", companyService.findAll());
                     return "user/user";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public String create(@ModelAttribute UserCreateEditDto user) {
+    public String create(@ModelAttribute UserCreateEditDto user, RedirectAttributes redirectAttributes) {
+        if (true) {
+            redirectAttributes.addFlashAttribute("user", user);
+            return "redirect:/users/registration";
+        }
         UserReadDto userDto = userService.create(user);
         return "redirect:/users/" + userDto.getId();
     }
@@ -51,11 +58,20 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
         if (!userService.delete(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
         return "redirect:/users";
+    }
+
+    @GetMapping("/registration")
+    public String registration(Model model, @ModelAttribute("user") UserCreateEditDto user) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("companies", companyService.findAll());
+        return "user/registration";
     }
 }
