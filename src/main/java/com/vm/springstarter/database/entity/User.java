@@ -2,6 +2,7 @@ package com.vm.springstarter.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class User implements BaseEntity<Long> {
     private String userName;
 
     @Column(name = "birth_date")
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDay;
 
     @Column(name = "firstname")
