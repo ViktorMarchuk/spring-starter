@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> ,FilterUserRepo {
+public interface UserRepo extends JpaRepository<User, Long>, FilterUserRepo, QuerydslPredicateExecutor<User> {
     //    @Query("select u from User u where u.firstName like %:firstname% and u.lastName like %:lastname%")
 //    List<User> findAllByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(@Param("firstname") String firstname,
 //                                                                                     @Param("lastname") String lastname);
