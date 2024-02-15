@@ -5,22 +5,30 @@
     <title>Register</title>
 </head>
 <body>
-<form th:action="@{/users}" method="post" th:object="${user}">
+<form th:action="@{/users}" method="post" enctype="multipart/form-data" th:object="${user}">
     <label for="username">User name:
         <input id="username" type="text" name="username" th:value="*{username}">
     </label><br>
+    <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
     <br>
     <label for="birthDate">Birthday:
         <input id="birthDate" type="date" name="birthDate" th:value="*{birthDate}">
     </label><br>
+    <div style="color: red" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Birthdate error</div>
     <br>
     <label for="firstname">First name:
         <input id="firstname" type="text" name="firstname" th:value="*{firstname}">
     </label><br>
+    <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname error</div>
     <br>
     <label for="lastname">Last name:
         <input id="lastname" type="text" name="lastname" th:value="*{lastname}">
     </label><br>
+    <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname error</div>
+    <br>
+    <label for="image">Image:
+        <input id="image" type="file" name="image">
+    </label>
     <br>
     <div th:each="role : ${roles}">
         <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role ==user.role}"><input>
@@ -38,10 +46,16 @@
             </select>
         </label>
     </div>
+    <div style="color: red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Role error</div>
 </form>
 <br>
 <form action="/users/registration">
     <button type="submit">Register</button>
 </form>
+<!--<div th:if="${errors}">-->
+<!--    <p style="color: red" th:each="error : ${errors}" th:text="${error.defaultMessage}">Error</p>-->
+<!--</div>-->
+<br>
+<div th:insert="~{fragments :: header}"></div>
 </body>
 </html>

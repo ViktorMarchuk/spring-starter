@@ -5,7 +5,10 @@
     <title>Login</title>
 </head>
 <body>
-<form action="GET/login" method="post">
+<div style="color: red" th:if="${param.error}">
+    Invalid username and password!
+</div>
+<form action="/login" method="post">
     <label for="username">Username:
         <input id="username" type="text" name="username">
     </label><br>

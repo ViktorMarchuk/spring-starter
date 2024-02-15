@@ -1,16 +1,13 @@
 package com.vm.springstarter.database.repo;
 
 
-
 import com.querydsl.jpa.impl.JPAQuery;
 import com.vm.springstarter.database.entity.User;
 import com.vm.springstarter.dto.QPredicates;
 import com.vm.springstarter.dto.UserFilter;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.vm.springstarter.database.entity.QUser.user;
@@ -32,6 +29,7 @@ public class FilterUserRepoImpl implements FilterUserRepo {
                 .where(predicate)
                 .fetch();
     }
+
 
 //    @Override
 //    public List<User> findAllByFilter(UserFilter filter) {
