@@ -1,8 +1,10 @@
 package com.vm.springstarter.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "users",schema = "springdata")
+@Table(name = "users", schema = "springdata")
 //@ToString(exclude = {"company"})
 //@EqualsAndHashCode(exclude = {"company"})
 
@@ -35,6 +37,10 @@ public class User implements BaseEntity<Long> {
     @Column(name = "lastname")
     private String lastName;
 
+    private String image;
+
+    private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -44,18 +50,18 @@ public class User implements BaseEntity<Long> {
 
 
     @Builder.Default
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserChat> userChats = new ArrayList<>();
 
     @Override
     public String toString() {
         return "User{" +
-               "id=" + id +
-               ", userName='" + userName + '\'' +
-               ", birthDay=" + birthDay +
-               ", firstName='" + firstName + '\'' +
-               ", lastName='" + lastName + '\'' +
-               ", role=" + role +
-               '}';
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", birthDay=" + birthDay +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

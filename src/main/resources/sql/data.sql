@@ -20,7 +20,10 @@ create table if not exists springdata.users
     firstname  varchar(64),
     lastname   varchar(64),
     role       varchar(32),
-    company_id int references springdata.company (id) on DELETE cascade
+    company_id int references springdata.company (id) on DELETE cascade,
+    image varchar(128),
+    password varchar(128) default '{noop}123'
+
 );
 
 create table if not exists springdata.payment

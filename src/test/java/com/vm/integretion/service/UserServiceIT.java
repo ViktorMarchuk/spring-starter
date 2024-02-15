@@ -2,37 +2,37 @@ package com.vm.integretion.service;
 
 import com.vm.annotation.IT;
 import com.vm.springstarter.database.entity.Role;
-import com.vm.springstarter.database.entity.User;
 import com.vm.springstarter.dto.UserCreateEditDto;
 import com.vm.springstarter.dto.UserReadDto;
-import com.vm.springstarter.pool.ConnectionPool;
 import com.vm.springstarter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.TestConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IT
 @RequiredArgsConstructor
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@Commit
 public class UserServiceIT {
     private final UserService userService;
     private final static String USER_3 = "Lena";
     private final static Long USER_1 = 1L;
     private final static Integer COMPANY_1 = 1;
-
-//    @MockBean(name = "connectionPool")
-//    private ConnectionPool connectionPool;
+    MockMultipartFile imageFile = new MockMultipartFile(
+            "image",
+            "test.png",
+            "image/png",
+            new byte[]{}
+    );
 
     @Test
     void findAllTest() {
@@ -54,7 +54,9 @@ public class UserServiceIT {
         us.ifPresent(u -> assertEquals(4, u.getId()));
     }
 
+
     @Test
+    @Commit
     void createTest() {
         UserCreateEditDto userCreateEditDto = new UserCreateEditDto(
                 "Stoun",
@@ -62,7 +64,8 @@ public class UserServiceIT {
                 "test",
                 "test",
                 Role.ADMIN,
-                COMPANY_1
+                COMPANY_1,
+                imageFile
         );
         UserReadDto actual = userService.create(userCreateEditDto);
         assertEquals(userCreateEditDto.getUsername(), actual.getUsername());
@@ -81,7 +84,8 @@ public class UserServiceIT {
                 "test1",
                 "test1",
                 Role.USER,
-                COMPANY_1
+                COMPANY_1,
+                imageFile
         );
         Optional<UserReadDto> actual = userService.update(USER_1, userDto);
         assertEquals(userDto.getUsername(), actual.get().getUsername());
@@ -92,8 +96,9 @@ public class UserServiceIT {
         assertEquals(userDto.getCompanyId(), actual.get().getCompany().id());
 
     }
+
     @Test
-    void deleteTest(){
+    void deleteTest() {
         assertFalse(userService.delete(-23L));
         assertTrue(userService.delete(USER_1));
     }

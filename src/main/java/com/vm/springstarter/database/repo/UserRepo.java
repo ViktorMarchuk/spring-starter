@@ -3,8 +3,6 @@ package com.vm.springstarter.database.repo;
 import com.vm.springstarter.database.entity.Role;
 import com.vm.springstarter.database.entity.User;
 import com.vm.springstarter.dto.IPersonalInfo;
-import com.vm.springstarter.dto.PersonalInfo;
-import com.vm.springstarter.dto.UserFilter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
@@ -15,7 +13,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,4 +55,5 @@ public interface UserRepo extends JpaRepository<User, Long>, FilterUserRepo, Que
 
     Slice<User> findAllBy(Pageable pageable);
 
+    Optional<User> findByUserName(String username);
 }

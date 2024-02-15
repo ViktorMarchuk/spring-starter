@@ -5,10 +5,11 @@ import com.vm.springstarter.database.entity.User;
 import com.vm.springstarter.database.repo.CompanyRepo;
 import com.vm.springstarter.dto.UserCreateEditDto;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @RequiredArgsConstructor
 @Component
@@ -36,6 +37,10 @@ public class UserCreateEditMapper implements Mapper<UserCreateEditDto, User> {
         user.setBirthDay(object.getBirthDate());
         user.setRole(object.getRole());
         user.setCompany(getCompany(object.getCompanyId()));
+
+        Optional.ofNullable(object.getImage())
+                .filter(Predicate.not(MultipartFile::isEmpty))
+                .ifPresent(image->user.setImage(image.getOriginalFilename()));
     }
 
     private Company getCompany(Integer companyId) {
