@@ -1,15 +1,16 @@
 insert into springdata.company(name)
 values ('Google'),
        ('Meta'),
-       ('Amazon');
+       ('Amazon'),
+       ('Basf');
 
 insert into springdata.company_locales(company_id, lang, description)
 values ((select id from springdata.company where name = 'Google'), 'en', 'Google description'),
        ((select id from springdata.company where name = 'Google'), 'ru', 'Google описание'),
        ((select id from springdata.company where name = 'Meta'), 'en', 'Meta description'),
        ((select id from springdata.company where name = 'Meta'), 'ru', 'Meta описание'),
-       ((select id from springdata.company where name = 'Amazon'), 'en', 'Google description'),
-       ((select id from springdata.company where name = 'Amazon'), 'ru', 'Google описание');
+       ((select id from springdata.company where name = 'Amazon'), 'en', 'Amazon description'),
+       ((select id from springdata.company where name = 'Amazon'), 'ru', 'Amazon описание');
 
 insert into springdata.users(username, birth_date, firstname, lastname, role, company_id)
 values ('Ocean', '1990-01-10', 'Oleg', 'Petrov', 'ADMIN', (select id from springdata.company where name = 'Google')),
