@@ -30,6 +30,10 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
     annotationProcessor 'com.querydsl:querydsl-apt'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation 'org.apiguardian:apiguardian-api:1.1.2'
+
 
 
 }
