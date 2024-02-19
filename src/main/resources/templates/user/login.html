@@ -5,6 +5,7 @@
     <title>Login</title>
 </head>
 <body>
+<div th:insert="~{fragments :: locale}"></div>
 <div style="color: red" th:if="${param.error}">
     Invalid username and password!
 </div>
